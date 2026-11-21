@@ -116,7 +116,7 @@ export default function LeaderboardPage() {
           <Link
             key={row.student.id}
             href="/profile"
-            className="card flex items-center gap-3 p-4 transition hover:-translate-y-0.5 hover:border-brand-200"
+            className="card flex items-center gap-3 p-4"
           >
             <div className="relative">
               <Avatar
@@ -125,7 +125,7 @@ export default function LeaderboardPage() {
                 size={48}
                 verified={row.student.verified}
               />
-              <span className="absolute -left-1 -top-1 flex h-6 w-6 items-center justify-center rounded-full bg-brand-600 text-[11px] font-black text-white">
+              <span className="absolute -left-1 -top-1 flex h-6 w-6 items-center justify-center rounded-[6px] border-2 border-[var(--ink)] bg-[var(--orange)] px-1 text-[11px] font-black text-[#171717]">
                 {index + 1}
               </span>
             </div>
@@ -134,7 +134,7 @@ export default function LeaderboardPage() {
               <p className="truncate text-[11px] text-[var(--muted)]">
                 {row.student.program} · {row.student.campus}
               </p>
-              <p className="mt-1 text-[11px] font-semibold text-brand-700">
+              <p className="mt-1 text-[11px] font-semibold text-[var(--ink)]">
                 {metric(index)}
               </p>
             </div>
@@ -142,7 +142,7 @@ export default function LeaderboardPage() {
         ))}
       </div>
 
-      <ul className="card divide-y divide-[var(--line)]">
+      <ul className="card divide-y-2 divide-[var(--ink)]">
         {rows.map((row, index) => {
           const isMe = row.student.id === currentUser.id;
           return (
@@ -150,7 +150,7 @@ export default function LeaderboardPage() {
               key={row.student.id}
               className={cn(
                 "flex items-center gap-3 px-4 py-3",
-                isMe ? "bg-brand-50/60" : "",
+                isMe ? "border-l-4 border-[var(--orange)] bg-[var(--brand-soft)]" : "hover:bg-[var(--surface-2)]",
               )}
             >
               <span className="w-5 text-center text-xs font-bold text-[var(--muted)]">
@@ -181,10 +181,10 @@ export default function LeaderboardPage() {
 
       <div>
         <SectionHeader icon="pulse" title="Aktivitas terbaru" />
-        <ul className="card divide-y divide-[var(--line)]">
+        <ul className="card divide-y-2 divide-[var(--ink)]">
           {feed.map((item) => (
             <li key={item.id} className="flex items-center gap-3 px-4 py-3">
-              <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
+              <span className="icon-tile h-8 w-8">
                 <Icon name={ACTIVITY_ICON[item.icon] ?? "pulse"} size={15} />
               </span>
               <p className="min-w-0 flex-1 truncate text-xs">{item.text}</p>

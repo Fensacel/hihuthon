@@ -89,7 +89,7 @@ export function ChatPanel({ matchId }: { matchId: string }) {
 
   return (
     <div className="card flex h-[calc(100vh-11rem)] flex-col overflow-hidden lg:h-[calc(100vh-9rem)]">
-      <header className="flex items-center gap-3 border-b border-[var(--line)] px-4 py-3">
+      <header className="flex items-center gap-3 border-b-2 border-[var(--ink)] px-4 py-3">
         <Avatar name={partner.name} hue={partner.avatarHue} size={40} />
         <div className="min-w-0 flex-1">
           <p className="truncate text-sm font-bold">{partner.name}</p>
@@ -115,10 +115,10 @@ export function ChatPanel({ matchId }: { matchId: string }) {
             >
               <div
                 className={cn(
-                  "max-w-[78%] rounded-[var(--radius-card)] px-3.5 py-2.5 text-sm",
+                  "max-w-[78%] rounded-[12px] border-2 border-[var(--ink)] px-3.5 py-2.5 text-sm",
                   mine
-                    ? "rounded-br-md bg-[var(--blue)] text-white"
-                    : "rounded-bl-md border border-[var(--line)] bg-[var(--surface)]",
+                    ? "rounded-br-[4px] bg-[var(--blue)] text-white"
+                    : "rounded-bl-[4px] border-2 border-[var(--ink)] bg-[var(--surface-2)]",
                 )}
               >
                 <p className="whitespace-pre-wrap leading-relaxed">{message.text}</p>
@@ -136,7 +136,7 @@ export function ChatPanel({ matchId }: { matchId: string }) {
         })}
       </div>
 
-      <div className="border-t border-[var(--line)] px-3 pt-2">
+      <div className="border-t-2 border-[var(--ink)] px-3 pt-2">
         <div className="no-scrollbar flex gap-2 overflow-x-auto pb-2">
           {QUICK_REPLIES.map((reply) => (
             <button

@@ -48,7 +48,7 @@ export function SwipeDeck({
   if (!top) {
     return (
       <div className="card flex flex-col items-center gap-3 p-8 text-center">
-        <span className="flex h-12 w-12 items-center justify-center rounded-sm border border-[var(--ink)] bg-brand-50 text-[var(--blue)]">
+        <span className="icon-tile h-12 w-12">
           <Icon name="search" size={22} />
         </span>
         <div>
@@ -119,14 +119,20 @@ export function SwipeDeck({
             setDrag(0);
           }}
         >
-          <div className="relative h-40 shrink-0 bg-[var(--blue)]">
-            <div
-              className="absolute inset-0 opacity-90"
-              style={{
-                background: `linear-gradient(135deg, #2464e8 0%, #4285f4 55%, #34a853 100%)`,
-              }}
+          <div className="relative h-40 shrink-0 overflow-hidden border-b-2 border-[var(--ink)] bg-[var(--blue)]">
+            <span
+              aria-hidden="true"
+              className="absolute -right-6 -top-10 h-36 w-36 rotate-12 rounded-[12px] border-2 border-[var(--ink)] bg-[var(--yellow)]"
             />
-            <div className="absolute inset-x-0 bottom-0 flex items-end gap-3 bg-gradient-to-t from-[#0a1c47]/55 to-transparent p-4">
+            <span
+              aria-hidden="true"
+              className="absolute left-1/3 top-3 h-16 w-16 rounded-full border-2 border-[var(--ink)] bg-[var(--orange)]"
+            />
+            <span
+              aria-hidden="true"
+              className="absolute left-6 top-5 h-20 w-3 rounded-[6px] border-2 border-[var(--ink)] bg-[var(--green)]"
+            />
+            <div className="absolute inset-x-0 bottom-0 flex items-end gap-3 bg-gradient-to-t from-[#171717]/75 to-transparent p-4">
               <Avatar name={top.name} hue={top.avatarHue} size={64} />
               <div className="pb-1 text-white">
                 <p className="text-lg font-black leading-tight">
@@ -142,8 +148,8 @@ export function SwipeDeck({
               <span
                 className={
                   drag > 0
-                    ? "absolute right-4 top-4 border border-[var(--ink)] bg-[var(--green)] px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-white"
-                    : "absolute left-4 top-4 border border-[var(--ink)] bg-[var(--red)] px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-white"
+                    ? "absolute right-4 top-4 rounded-[8px] border-2 border-[var(--ink)] bg-[var(--green)] px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-[#171717] shadow-[3px_3px_0_0_var(--shadow-color)]"
+                    : "absolute left-4 top-4 rounded-[8px] border-2 border-[var(--ink)] bg-[var(--red)] px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.12em] text-[#171717] shadow-[3px_3px_0_0_var(--shadow-color)]"
                 }
               >
                 {DIRECTION_LABEL[drag > 0 ? "like" : "pass"]}
@@ -182,18 +188,18 @@ export function SwipeDeck({
             <button
               type="button"
               onClick={() => setReportFor(top)}
-              className="mt-4 inline-flex items-center gap-1.5 text-[11px] font-semibold text-[var(--muted)] underline-offset-2 hover:text-rose-600 hover:underline"
+              className="mt-4 inline-flex items-center gap-1.5 text-[11px] font-semibold text-[var(--muted)] underline-offset-2 hover:text-[var(--danger-ink)] hover:underline"
             >
               <Icon name="flag" size={13} />
               Laporkan profil ini
             </button>
           </div>
 
-          <div className="flex items-center justify-center gap-4 border-t border-[var(--line)] px-5 py-4">
+          <div className="flex items-center justify-center gap-4 border-t-2 border-[var(--ink)] px-5 py-4">
             <button
               type="button"
               onClick={() => act("pass")}
-              className="btn btn-ghost h-14 w-14 rounded-full border-[var(--line)] p-0 text-rose-600"
+              className="btn btn-danger h-14 w-14 rounded-[12px] p-0"
               aria-label="Lewati profil"
             >
               <Icon name="close" size={24} />
@@ -207,7 +213,7 @@ export function SwipeDeck({
             <button
               type="button"
               onClick={() => act("like")}
-              className="btn btn-primary h-14 w-14 rounded-full p-0"
+              className="btn btn-primary h-14 w-14 rounded-[12px] p-0"
               aria-label="Suka profil"
             >
               <Icon name="heart" size={24} />

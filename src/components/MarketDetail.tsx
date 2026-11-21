@@ -74,7 +74,7 @@ export function MarketDetail({ marketId }: { marketId: string }) {
     <div className="space-y-4">
       <Link
         href="/pulse"
-        className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--muted)] transition hover:text-brand-700"
+        className="inline-flex items-center gap-1.5 text-xs font-bold text-[var(--muted)] transition hover:text-[var(--orange)]"
       >
         <Icon name="back" size={15} />
         Semua prediksi
@@ -93,14 +93,14 @@ export function MarketDetail({ marketId }: { marketId: string }) {
             <button
               type="button"
               onClick={() => setReportOpen(true)}
-              className="ml-auto inline-flex items-center gap-1 text-[11px] font-semibold text-[var(--muted)] hover:text-rose-600"
+              className="ml-auto inline-flex items-center gap-1 text-[11px] font-semibold text-[var(--muted)] hover:text-[var(--danger-ink)]"
             >
               <Icon name="flag" size={13} />
               Laporkan
             </button>
           </div>
 
-          <h1 className="text-xl font-black leading-snug">{market.question}</h1>
+          <h1 className="display text-2xl leading-tight">{market.question}</h1>
           <p className="text-sm leading-relaxed text-[var(--muted)]">
             {market.description}
           </p>
@@ -123,7 +123,7 @@ export function MarketDetail({ marketId }: { marketId: string }) {
           </div>
 
           {creator ? (
-            <div className="flex items-center gap-2.5 rounded-[var(--radius-card)] border border-[var(--line)] bg-[var(--background)] p-3">
+            <div className="flex items-center gap-2.5 rounded-[12px] border-2 border-[var(--ink)] bg-[var(--surface-2)] p-3">
               <Avatar
                 name={creator.name}
                 hue={creator.avatarHue}
@@ -143,7 +143,7 @@ export function MarketDetail({ marketId }: { marketId: string }) {
           ) : null}
         </div>
 
-        <div className="space-y-3 border-t border-[var(--line)] p-5">
+        <div className="space-y-3 border-t-2 border-[var(--ink)] p-5">
           <p className="text-[11px] font-semibold uppercase tracking-wide text-[var(--muted)]">
             Distribusi prediksi
           </p>
@@ -158,7 +158,7 @@ export function MarketDetail({ marketId }: { marketId: string }) {
                     <span
                       className={cn(
                         "font-semibold",
-                        isWinner ? "text-emerald-700" : "",
+                        isWinner ? "text-[var(--success-ink)]" : "",
                       )}
                     >
                       {option.label}
@@ -184,7 +184,7 @@ export function MarketDetail({ marketId }: { marketId: string }) {
       {status === "resolved" ? (
         <section className="card p-5">
           <div className="flex items-start gap-3">
-            <span className="flex h-10 w-10 items-center justify-center rounded-sm border border-[var(--ink)] bg-emerald-50 text-emerald-600">
+            <span className="icon-tile h-10 w-10 bg-[var(--green)]">
               <Icon name="trophy" size={19} />
             </span>
             <div>
@@ -198,11 +198,11 @@ export function MarketDetail({ marketId }: { marketId: string }) {
               {vote ? (
                 <p className="mt-2 text-sm">
                   {vote.outcome === "won" ? (
-                    <span className="font-bold text-emerald-700">
+                    <span className="font-bold text-[var(--success-ink)]">
                       Prediksimu benar — payout +{formatNumber(vote.payout ?? 0)} poin
                     </span>
                   ) : (
-                    <span className="font-semibold text-rose-600">
+                    <span className="font-bold text-[var(--danger-ink)]">
                       Prediksimu belum tepat — stake {formatNumber(vote.stake)} poin
                       hangus
                     </span>
@@ -218,7 +218,7 @@ export function MarketDetail({ marketId }: { marketId: string }) {
         </section>
       ) : locked ? (
         <section className="card flex items-start gap-3 p-5">
-          <span className="flex h-10 w-10 items-center justify-center rounded-sm border border-[var(--ink)] bg-amber-50 text-amber-600">
+          <span className="icon-tile h-10 w-10 bg-[var(--yellow)]">
             <Icon name="clock" size={19} />
           </span>
           <div>
@@ -247,10 +247,10 @@ export function MarketDetail({ marketId }: { marketId: string }) {
                 type="button"
                 onClick={() => setOptionId(option.id)}
                 className={cn(
-                  "flex items-center justify-between gap-2 rounded-[var(--radius-card)] border px-3.5 py-3 text-left text-sm font-semibold transition",
+                  "flex items-center justify-between gap-2 rounded-[12px] border-2 px-3.5 py-3 text-left text-sm font-bold transition",
                   selected === option.id
-                    ? "border-brand-400 bg-brand-50 text-brand-700"
-                    : "border-[var(--line)] hover:border-brand-200",
+                    ? "border-[var(--ink)] bg-[var(--brand-soft)] text-[var(--ink)] shadow-[3px_3px_0_0_var(--shadow-color)]"
+                    : "border-[var(--ink)] bg-[var(--surface-2)] hover:-translate-y-0.5",
                 )}
               >
                 {option.label}
@@ -289,7 +289,7 @@ export function MarketDetail({ marketId }: { marketId: string }) {
             </div>
           </div>
 
-          <div className="rounded-[var(--radius-card)] border border-[var(--line)] bg-[var(--background)] p-3 text-xs">
+          <div className="rounded-[12px] border-2 border-[var(--ink)] bg-[var(--surface-2)] p-3 text-xs">
             <div className="flex items-center justify-between">
               <span className="text-[var(--muted)]">
                 Estimasi payout bila benar
@@ -348,7 +348,7 @@ export function MarketDetail({ marketId }: { marketId: string }) {
             Belum ada yang memprediksi. Jadilah yang pertama!
           </p>
         ) : (
-          <ul className="card divide-y divide-[var(--line)]">
+          <ul className="card divide-y-2 divide-[var(--ink)]">
             {recentVotes.map((item) => {
               const student = findStudent(state, item.studentId);
               const option = market.options.find(

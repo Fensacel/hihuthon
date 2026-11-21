@@ -51,7 +51,7 @@ export default function CreateMarketPage() {
     <div className="space-y-4">
       <Link
         href="/pulse"
-        className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--muted)] transition hover:text-brand-700"
+        className="inline-flex items-center gap-1.5 text-xs font-bold text-[var(--muted)] transition hover:text-[var(--orange)]"
       >
         <Icon name="back" size={15} />
         Semua prediksi
@@ -186,7 +186,7 @@ export default function CreateMarketPage() {
           </div>
         </Field>
 
-        <div className="rounded-2xl border border-[var(--line)] bg-[var(--background)] p-3 text-xs">
+        <div className="rounded-[12px] border-2 border-[var(--ink)] bg-[var(--surface-2)] p-3 text-xs">
           <div className="flex items-center justify-between">
             <span className="text-[var(--muted)]">Opsi valid</span>
             <span className="font-semibold">{filledOptions.length} opsi</span>

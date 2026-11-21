@@ -5,8 +5,9 @@ import { useMemo, useState } from "react";
 import { Avatar, Badge } from "@/components/ui";
 import { Icon, type IconName } from "@/components/Icon";
 import { Logo } from "@/components/Logo";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { useStore } from "@/lib/store";
-import { formatNumber } from "@/lib/utils";
+import { cn, formatNumber } from "@/lib/utils";
 
 const HIGHLIGHTS: Array<{ icon: IconName; text: string }> = [
   { icon: "heart", text: "Swipe profil mahasiswa satu kampus" },
@@ -36,7 +37,15 @@ export default function LoginPage() {
     state.students.find((student) => student.id === selectedId) ?? currentUser;
 
   return (
-    <div className="mx-auto flex min-h-screen w-full max-w-[1280px] flex-col items-center gap-6 px-4 py-8 lg:flex-row lg:items-center lg:gap-10 lg:py-12">
+    <div className="mx-auto flex min-h-screen w-full max-w-[var(--shell)] flex-col gap-4 px-4 py-6 lg:py-10">
+      <div className="flex w-full items-center justify-between gap-3">
+        <span className="eyebrow">
+          <span className="status-dot" />
+          SocialHub · Kemang &amp; Sudirman
+        </span>
+        <ThemeToggle />
+      </div>
+      <div className="flex flex-1 flex-col items-center gap-6 lg:flex-row lg:items-center lg:gap-10">
       <section className="w-full lg:w-[46%]">
         <span className="eyebrow">
           <span className="status-dot" />
@@ -54,7 +63,7 @@ export default function LoginPage() {
         <ul className="mt-5 space-y-2.5 text-sm">
           {HIGHLIGHTS.map((item) => (
             <li key={item.text} className="flex items-center gap-2.5">
-              <span className="flex h-8 w-8 items-center justify-center rounded-sm border border-[var(--ink)] bg-brand-50 text-[var(--blue)]">
+              <span className="icon-tile h-8 w-8">
                 <Icon name={item.icon} size={15} />
               </span>
               {item.text}
@@ -141,11 +150,12 @@ export default function LoginPage() {
               key={student.id}
               type="button"
               onClick={() => setSelectedId(student.id)}
-              className={
+              className={cn(
+                "flex w-full items-center gap-3 rounded-[12px] border-2 border-[var(--ink)] p-3 text-left transition",
                 student.id === selectedId
-                  ? "flex w-full items-center gap-3 rounded-[var(--radius-card)] border border-[var(--ink)] bg-brand-50 p-3 text-left shadow-[3px_3px_0_0_var(--ink)]"
-                  : "flex w-full items-center gap-3 rounded-[var(--radius-card)] border border-[var(--line)] bg-[var(--surface)] p-3 text-left transition hover:border-[var(--ink)]"
-              }
+                  ? "bg-[var(--brand-soft)] shadow-[5px_5px_0_0_var(--shadow-color)]"
+                  : "bg-[var(--surface)] shadow-[2px_2px_0_0_var(--shadow-color)] hover:-translate-y-0.5",
+              )}
             >
               <Avatar
                 name={student.name}
@@ -193,6 +203,7 @@ export default function LoginPage() {
           Masuk sebagai {selected.name.split(" ")[0]}
         </button>
       </section>
+      </div>
     </div>
   );
 }

@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Icon, type IconName } from "./Icon";
 import { Logo } from "./Logo";
+import { ThemeToggle } from "./ThemeToggle";
 import { Avatar } from "./ui";
 import { cn, formatNumber } from "@/lib/utils";
 import { unreadTotal } from "@/lib/selectors";
@@ -18,7 +19,7 @@ interface NavItem {
   badge?: number;
 }
 
-const ACCENTS = ["var(--blue)", "var(--red)", "var(--yellow)", "var(--green)"];
+const ACCENTS = ["var(--orange)", "var(--yellow)", "var(--green)", "var(--blue)"];
 
 const TICKER = [
   "Swipe profil",
@@ -92,9 +93,9 @@ export function AppShell({ children }: { children: ReactNode }) {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <div className="fixed inset-x-0 top-0 z-[60] flex h-[3px]">
+      <div className="fixed inset-x-0 top-0 z-[60] flex h-1">
         {ACCENTS.map((accent, index) => (
-          <span key={accent} className="relative h-full flex-1 bg-[var(--line)]">
+          <span key={accent} className="relative h-full flex-1 bg-[var(--surface-2)]">
             <span
               ref={(el) => {
                 fills.current[index] = el;
@@ -106,46 +107,42 @@ export function AppShell({ children }: { children: ReactNode }) {
         ))}
       </div>
 
-      <header className="sticky top-0 z-50 border-b border-[var(--ink)] bg-[var(--surface-deep)] backdrop-blur">
+      <header className="sticky top-0 z-50 border-b-[3px] border-[var(--ink)] bg-[var(--surface)]">
         <div className="mx-auto flex h-[var(--header)] w-full max-w-[var(--shell)] items-center gap-3 px-[var(--gutter)]">
           <Link href="/" className="flex shrink-0 items-center gap-3">
             <Logo height={42} priority />
             <span className="eyebrow hidden sm:block">Kemang · Sudirman</span>
           </Link>
 
-          <nav className="ml-auto hidden items-center gap-1 lg:flex">
-            {items.map((item, index) => (
+          <nav className="ml-auto hidden items-center gap-1.5 xl:flex">
+            {items.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
+                aria-current={isActive(item.href) ? "page" : undefined}
                 className={cn(
-                  "relative inline-flex items-center px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-[0.09em] transition",
+                  "inline-flex items-center rounded-[8px] border-2 px-2.5 py-2 font-mono text-[10px] font-bold uppercase tracking-[0.08em] transition",
                   isActive(item.href)
-                    ? "text-[var(--ink)]"
-                    : "text-[var(--muted)] hover:text-[var(--ink)]",
+                    ? "border-[var(--ink)] bg-[var(--ink)] text-[var(--surface)]"
+                    : "border-transparent text-[var(--ink)] hover:border-[var(--ink)] hover:bg-[var(--yellow)]",
                 )}
               >
                 {item.label}
                 {item.badge ? (
-                  <span className="ml-1.5 bg-[var(--red)] px-1.5 py-0.5 font-mono text-[9px] font-bold text-white">
+                  <span className="ml-1.5 rounded-[4px] border-2 border-[#171717] bg-[var(--red)] px-1 font-mono text-[9px] font-bold text-[#171717]">
                     {item.badge}
                   </span>
-                ) : null}
-                {isActive(item.href) ? (
-                  <span
-                    className="absolute inset-x-2 bottom-0 h-[3px]"
-                    style={{ background: ACCENTS[index % 4] }}
-                  />
                 ) : null}
               </Link>
             ))}
           </nav>
 
-          <div className="ml-auto flex items-center gap-2 lg:ml-3">
+          <div className="ml-auto flex items-center gap-2 xl:ml-3">
             <span className="chip chip-static hidden sm:inline-flex">
               <Icon name="coins" size={12} />
               {formatNumber(me.points)}
             </span>
+            <ThemeToggle />
             <Link
               href="/profile"
               aria-label="Profil"
@@ -169,7 +166,7 @@ export function AppShell({ children }: { children: ReactNode }) {
               onClick={() => setMenuOpen((open) => !open)}
               aria-label="Menu"
               aria-expanded={menuOpen}
-              className="btn btn-ghost !px-3 !py-2 lg:hidden"
+              className="btn btn-ghost !px-3 !py-2 xl:hidden"
             >
               <Icon name={menuOpen ? "close" : "menu"} size={16} />
             </button>
@@ -177,7 +174,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         </div>
 
         {menuOpen ? (
-          <div className="border-t border-[var(--ink)] bg-[var(--surface)] px-[var(--gutter)] py-3 lg:hidden">
+          <div className="border-t-[3px] border-[var(--ink)] bg-[var(--surface)] px-[var(--gutter)] py-3 xl:hidden">
             <nav className="grid grid-cols-2 gap-2">
               {items.map((item) => (
                 <Link
@@ -185,22 +182,29 @@ export function AppShell({ children }: { children: ReactNode }) {
                   href={item.href}
                   onClick={() => setMenuOpen(false)}
                   className={cn(
-                    "flex items-center gap-2 border px-3 py-2 font-mono text-[11px] font-semibold uppercase tracking-[0.08em]",
+                    "flex items-center gap-2 rounded-[8px] border-2 px-3 py-2 font-mono text-[11px] font-bold uppercase tracking-[0.08em]",
                     isActive(item.href)
-                      ? "border-[var(--ink)] bg-[var(--ink)] text-[var(--paper)]"
-                      : "border-[var(--line)] text-[var(--muted)]",
+                      ? "border-[var(--ink)] bg-[var(--ink)] text-[var(--surface)]"
+                      : "border-[var(--ink)] bg-[var(--surface)] text-[var(--ink)]",
                   )}
                 >
                   <Icon name={item.icon} size={14} />
                   {item.label}
                   {item.badge ? (
-                    <span className="ml-auto bg-[var(--red)] px-1.5 font-mono text-[9px] font-bold text-white">
+                    <span className="ml-auto rounded-[4px] border-2 border-[#171717] bg-[var(--red)] px-1 font-mono text-[9px] font-bold text-[#171717]">
                       {item.badge}
                     </span>
                   ) : null}
                 </Link>
               ))}
             </nav>
+            <div className="mt-3 flex items-center justify-between gap-3">
+              <span className="eyebrow">
+                <span className="status-dot" />
+                Tema tampilan
+              </span>
+              <ThemeToggle />
+            </div>
           </div>
         ) : null}
       </header>
@@ -219,7 +223,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         {children}
       </main>
 
-      <footer className="border-t border-[var(--ink)] bg-[var(--surface)]">
+      <footer className="bg-[var(--surface)]">
         <div className="strip mb-0 flex justify-around gap-6 overflow-hidden py-3">
           {["Discover", "Match", "Prediksi", "Peringkat"].map((word) => (
             <span key={word} className="strip-item">
@@ -316,29 +320,29 @@ export function AppShell({ children }: { children: ReactNode }) {
         </p>
       </footer>
 
-      <nav className="fixed inset-x-0 bottom-0 z-50 border-t border-[var(--ink)] bg-[var(--surface)] lg:hidden">
+      <nav className="fixed inset-x-0 bottom-0 z-50 border-t-[3px] border-[var(--ink)] bg-[var(--surface)] lg:hidden">
         <div className="grid grid-cols-5">
           {items.slice(0, 5).map((item, index) => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                "relative flex flex-col items-center gap-1 py-2.5 font-mono text-[9px] font-semibold uppercase tracking-[0.06em]",
+                "relative flex flex-col items-center gap-1 py-2.5 font-mono text-[9px] font-bold uppercase tracking-[0.06em]",
                 isActive(item.href)
-                  ? "text-[var(--ink)]"
-                  : "text-[var(--muted)]",
+                  ? "bg-[var(--yellow)] text-[#171717]"
+                  : "text-[var(--ink)]",
               )}
             >
               {isActive(item.href) ? (
                 <span
-                  className="absolute inset-x-4 top-0 h-[3px]"
+                  className="absolute inset-x-0 top-0 h-1"
                   style={{ background: ACCENTS[index % 4] }}
                 />
               ) : null}
               <Icon name={item.icon} size={17} />
               {item.label}
               {item.badge ? (
-                <span className="absolute right-3 top-1.5 bg-[var(--red)] px-1 font-mono text-[8px] font-bold text-white">
+                <span className="absolute right-3 top-1.5 rounded-[4px] border-2 border-[#171717] bg-[var(--red)] px-1 font-mono text-[8px] font-bold text-[#171717]">
                   {item.badge}
                 </span>
               ) : null}

@@ -44,12 +44,12 @@ export default function MatchesPage() {
           }
         />
       ) : (
-        <ul className="card divide-y divide-[var(--line)] overflow-hidden">
+        <ul className="card divide-y-2 divide-[var(--ink)] overflow-hidden">
           {matches.map((match) => (
             <li key={match.id}>
               <Link
                 href={`/chat/${match.id}`}
-                className="flex items-center gap-3 px-4 py-3.5 transition hover:bg-[var(--background)]"
+                className="flex items-center gap-3 px-4 py-3.5 transition hover:bg-[var(--surface-2)]"
               >
                 <Avatar
                   name={match.partner.name}
@@ -74,7 +74,7 @@ export default function MatchesPage() {
                     {formatRelative(match.lastMessageAt ?? match.createdAt)}
                   </span>
                   {match.unread > 0 ? (
-                    <span className="rounded-full bg-rose-500 px-1.5 py-0.5 text-[10px] font-bold text-white">
+                    <span className="rounded-[6px] border-2 border-[var(--ink)] bg-[var(--red)] px-1.5 py-0.5 text-[10px] font-bold text-[#171717]">
                       {match.unread}
                     </span>
                   ) : null}

@@ -156,12 +156,12 @@ export default function AdminPage() {
             <Icon name={option.icon} size={13} />
             {option.label}
             {option.key === "reports" && openReports > 0 ? (
-              <span className="rounded-full bg-white/25 px-1.5 text-[10px] font-bold">
+              <span className="rounded-[4px] border-2 border-[#171717] bg-[var(--yellow)] px-1 text-[10px] font-bold text-[#171717]">
                 {openReports}
               </span>
             ) : null}
             {option.key === "validation" && awaiting.length > 0 ? (
-              <span className="rounded-full bg-white/25 px-1.5 text-[10px] font-bold">
+              <span className="rounded-[4px] border-2 border-[#171717] bg-[var(--yellow)] px-1 text-[10px] font-bold text-[#171717]">
                 {awaiting.length}
               </span>
             ) : null}
@@ -233,7 +233,7 @@ export default function AdminPage() {
                     </div>
 
                     {report.reviewNote ? (
-                      <p className="rounded-2xl bg-[var(--background)] p-3 text-[11px] text-[var(--muted)]">
+                      <p className="rounded-[12px] border-2 border-[var(--ink)] bg-[var(--surface-2)] p-3 text-[11px] text-[var(--muted)]">
                         Catatan admin: {report.reviewNote}
                       </p>
                     ) : null}
@@ -271,7 +271,7 @@ export default function AdminPage() {
                       </button>
                       <button
                         type="button"
-                        className="btn btn-ghost text-rose-600"
+                        className="btn btn-ghost text-[var(--danger-ink)]"
                         disabled={report.status === "dismissed"}
                         onClick={() =>
                           reviewReport(
@@ -346,10 +346,10 @@ export default function AdminPage() {
                           }))
                         }
                         className={cn(
-                          "flex items-center justify-between gap-2 rounded-2xl border px-3.5 py-2.5 text-left text-xs font-semibold transition",
+                          "flex items-center justify-between gap-2 rounded-[12px] border-2 px-3.5 py-2.5 text-left text-xs font-bold transition",
                           picked === option.id
-                            ? "border-brand-400 bg-brand-50 text-brand-700"
-                            : "border-[var(--line)] hover:border-brand-200",
+                            ? "border-[var(--ink)] bg-[var(--brand-soft)] text-[var(--ink)]"
+                            : "border-[var(--ink)] bg-[var(--surface-2)]",
                         )}
                       >
                         {option.label}
@@ -399,7 +399,7 @@ export default function AdminPage() {
               description="Coba kata kunci lain untuk mencari mahasiswa."
             />
           ) : (
-            <ul className="card divide-y divide-[var(--line)]">
+            <ul className="card divide-y-2 divide-[var(--ink)]">
               {students.map((student) => (
                 <li
                   key={student.id}

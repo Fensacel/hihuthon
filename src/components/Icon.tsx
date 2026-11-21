@@ -30,7 +30,9 @@ export type IconName =
   | "star"
   | "menu"
   | "verified"
-  | "bolt";
+  | "bolt"
+  | "sun"
+  | "moon";
 
 const PATHS: Record<IconName, string> = {
   home: "M3 10.5 12 3l9 7.5V21a1 1 0 0 1-1 1h-5v-6H10v6H4a1 1 0 0 1-1-1z",
@@ -70,6 +72,8 @@ const PATHS: Record<IconName, string> = {
   verified:
     "M12 2l2.4 2.1 3.2-.3.9 3.1 2.8 1.6-1.3 2.9 1.3 2.9-2.8 1.6-.9 3.1-3.2-.3L12 22l-2.4-2.1-3.2.3-.9-3.1L2.7 15.5 4 12.6 2.7 9.7l2.8-1.6.9-3.1 3.2.3zM9 12l2 2 4-4",
   bolt: "M13 2 4 14h6l-1 8 9-12h-6z",
+  sun: "M12 4V2M12 22v-2M4 12H2M22 12h-2M5.6 5.6 4.2 4.2M19.8 19.8l-1.4-1.4M18.4 5.6l1.4-1.4M4.2 19.8l1.4-1.4M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10z",
+  moon: "M21 13.2A9 9 0 1 1 10.8 3a7 7 0 0 0 10.2 10.2z",
 };
 
 interface IconProps extends SVGProps<SVGSVGElement> {

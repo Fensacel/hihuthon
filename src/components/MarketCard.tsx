@@ -56,7 +56,7 @@ export function MarketCard({
   return (
     <Link
       href={`/pulse/${market.id}`}
-      className="card block p-4 transition hover:-translate-y-0.5 hover:border-brand-200"
+      className="card block p-4"
     >
       <div className="flex flex-wrap items-center gap-2">
         <Badge tone="neutral" icon={CATEGORY_ICON[market.category]}>
@@ -82,7 +82,7 @@ export function MarketCard({
                 <span
                   className={
                     isWinner
-                      ? "font-bold text-emerald-700"
+                      ? "font-bold text-[var(--success-ink)]"
                       : isLeading
                         ? "font-semibold"
                         : "text-[var(--muted)]"
@@ -93,7 +93,7 @@ export function MarketCard({
                 <span className="font-semibold tabular-nums">{percent}%</span>
               </div>
               <ProgressBar
-                className="mt-1 h-1.5"
+                className="mt-1.5 h-2.5"
                 value={percent}
                 tone={isWinner ? "success" : isLeading ? "brand" : "brand"}
               />
@@ -116,7 +116,7 @@ export function MarketCard({
           {market.campus}
         </span>
         {status === "resolved" && resolvedOption ? (
-          <span className="inline-flex items-center gap-1 font-semibold text-emerald-700">
+          <span className="inline-flex items-center gap-1 font-bold text-[var(--success-ink)]">
             <Icon name="check" size={12} />
             {resolvedOption.label}
           </span>

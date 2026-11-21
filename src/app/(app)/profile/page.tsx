@@ -6,6 +6,7 @@ import { useMemo, useState } from "react";
 import { Avatar, Badge, Field, Modal, SectionHeader, StatTile } from "@/components/ui";
 import { Icon } from "@/components/Icon";
 import { ReportDialog } from "@/components/ReportDialog";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { activityFeed, myRank } from "@/lib/selectors";
 import { useStore } from "@/lib/store";
 import {
@@ -72,6 +73,16 @@ export default function ProfilePage() {
       />
 
       <section className="card overflow-hidden">
+        <div
+          aria-hidden="true"
+          className="flex h-14 items-center justify-end border-b-2 border-[var(--ink)] bg-[var(--yellow)] px-4"
+        >
+          <span className="gdots">
+            <span style={{ background: "var(--orange)" }} />
+            <span style={{ background: "var(--blue)" }} />
+            <span style={{ background: "var(--green)" }} />
+          </span>
+        </div>
         <div className="flex flex-col items-start gap-4 p-5 sm:flex-row sm:items-center">
           <Avatar
             name={currentUser.name}
@@ -163,7 +174,7 @@ export default function ProfilePage() {
             Belum ada prediksi. Ikut satu prediksi untuk mulai mengumpulkan reputasi.
           </p>
         ) : (
-          <ul className="card divide-y divide-[var(--line)]">
+          <ul className="card divide-y-2 divide-[var(--ink)]">
             {myVotes.map((vote) => {
               const market = state.markets.find(
                 (item) => item.id === vote.marketId,
@@ -176,7 +187,7 @@ export default function ProfilePage() {
                 <li key={vote.id}>
                   <Link
                     href={`/pulse/${market.id}`}
-                    className="flex items-center gap-3 px-4 py-3 transition hover:bg-[var(--background)]"
+                    className="flex items-center gap-3 px-4 py-3 transition hover:bg-[var(--surface-2)]"
                   >
                     <div className="min-w-0 flex-1">
                       <p className="truncate text-xs font-bold">
@@ -214,10 +225,10 @@ export default function ProfilePage() {
             Belum ada aktivitas. Mulai swipe di Discover.
           </p>
         ) : (
-          <ul className="card divide-y divide-[var(--line)]">
+          <ul className="card divide-y-2 divide-[var(--ink)]">
             {feed.map((item) => (
               <li key={item.id} className="flex items-center gap-3 px-4 py-3">
-                <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
+                <span className="icon-tile h-8 w-8">
                   <Icon name="pulse" size={15} />
                 </span>
                 <p className="min-w-0 flex-1 truncate text-xs">{item.text}</p>
@@ -242,6 +253,13 @@ export default function ProfilePage() {
           <Badge tone="neutral" icon="info">
             Poin virtual
           </Badge>
+        </div>
+        <div className="flex items-center justify-between gap-3 rounded-[12px] border-2 border-[var(--ink)] bg-[var(--surface-2)] px-3.5 py-2.5">
+          <span className="eyebrow">
+            <span className="status-dot" />
+            Tema tampilan
+          </span>
+          <ThemeToggle />
         </div>
         <div className="flex flex-col gap-2 sm:flex-row">
           <button
@@ -272,7 +290,7 @@ export default function ProfilePage() {
           </button>
           <button
             type="button"
-            className="btn btn-ghost flex-1 text-rose-600"
+            className="btn btn-ghost flex-1 text-[var(--danger-ink)]"
             onClick={() => {
               logout();
               router.replace("/login");

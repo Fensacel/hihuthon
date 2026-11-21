@@ -59,20 +59,19 @@ export function initials(name: string): string {
     .join("");
 }
 
-const AVATAR_PAIRS: Array<[string, string]> = [
-  ["#4d90ff", "#1951fc"],
-  ["#3781fc", "#0b2cb1"],
-  ["#2563ff", "#03195b"],
-  ["#6366f1", "#1951fc"],
-  ["#0ea5e9", "#1951fc"],
-  ["#1951fc", "#7c3aed"],
-  ["#3182ce", "#0b2cb1"],
-  ["#4d90ff", "#1e3a8a"],
-];
+const AVATAR_BLOCKS = [
+  "#ff5733",
+  "#ffc928",
+  "#14b8a6",
+  "#ff9ec4",
+  "#8ac6ff",
+  "#c4b5fd",
+  "#ffd9a0",
+] as const;
 
-export function avatarGradient(hue: number): string {
-  const [from, to] = AVATAR_PAIRS[Math.abs(hue) % AVATAR_PAIRS.length];
-  return `linear-gradient(135deg, ${from} 0%, ${to} 100%)`;
+/** Solid colour block for an avatar — vibrant, always readable with ink text. */
+export function avatarBlock(hue: number): string {
+  return AVATAR_BLOCKS[Math.abs(hue) % AVATAR_BLOCKS.length];
 }
 
 export function formatRelative(iso: string, now: number = Date.now()): string {

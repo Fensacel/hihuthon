@@ -153,7 +153,7 @@ export default function PulsePage() {
         {category !== "Semua" || campus !== "Semua" || status !== "Semua" ? (
           <button
             type="button"
-            className="text-xs font-semibold text-brand-700 hover:underline"
+            className="link text-xs"
             onClick={() => {
               setCategory("Semua");
               setCampus("Semua");
@@ -187,7 +187,7 @@ export default function PulsePage() {
 
       <div className="card flex flex-wrap items-center justify-between gap-3 p-4">
         <div className="flex items-start gap-3">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
+          <span className="icon-tile h-9 w-9">
             <Icon name="info" size={17} />
           </span>
           <div>

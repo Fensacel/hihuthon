@@ -9,7 +9,7 @@ export default async function ChatPage({ params }: PageProps<"/chat/[matchId]">)
     <div className="space-y-3">
       <Link
         href="/matches"
-        className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--muted)] transition hover:text-brand-700"
+        className="inline-flex items-center gap-1.5 text-xs font-bold text-[var(--muted)] transition hover:text-[var(--orange)]"
       >
         <Icon name="back" size={15} />
         Semua chat

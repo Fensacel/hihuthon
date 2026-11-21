@@ -63,7 +63,7 @@ export function ReportDialog({
     >
       <div className="space-y-4">
         {targetLabel ? (
-          <div className="rounded-[var(--radius-card)] border border-[var(--line)] bg-[var(--background)] p-3 text-xs">
+          <div className="rounded-[12px] border-2 border-[var(--ink)] bg-[var(--surface-2)] p-3 text-xs">
             <p className="font-semibold uppercase tracking-wide text-[var(--muted)]">
               Dilaporkan
             </p>

@@ -53,7 +53,7 @@ export default function DiscoverPage() {
         }
       >
         <div className="flex flex-col items-center gap-2 py-2 text-center">
-          <span className="flex h-14 w-14 items-center justify-center border border-[var(--ink)] bg-brand-50 text-[var(--blue)]">
+          <span className="icon-tile h-14 w-14">
             <Icon name="heart" size={26} />
           </span>
           <p className="font-display text-xl font-bold">
